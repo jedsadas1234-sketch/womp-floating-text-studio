@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10111a">
+<title>W.O.M.P. Floating Text Studio</title>
+<style>
+:root{--bg:#10111a;--panel:#191b28;--panel2:#222536;--line:#303449;--text:#f4f5fb;--muted:#9ba2b8;--accent:#8b7cff;--accent2:#5fe0ce;--danger:#ff7188}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}body{padding-bottom:env(safe-area-inset-bottom)}button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit}.app{max-width:1100px;margin:auto;min-height:100dvh;display:flex;flex-direction:column}.top{position:sticky;top:0;z-index:20;background:#10111aeb;backdrop-filter:blur(16px);border-bottom:1px solid var(--line);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;align-items:center;gap:10px}.logo{width:35px;height:35px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-weight:900;color:#111}.brand b{display:block;font-size:14px;letter-spacing:.04em}.brand small{color:var(--muted);font-size:10px}.top-actions{display:flex;gap:7px}.btn{border:1px solid var(--line);background:var(--panel2);padding:9px 12px;border-radius:11px;font-size:12px;font-weight:700}.btn.primary{background:var(--accent);border-color:var(--accent);color:#100e20}.btn.ghost{background:transparent}.main{padding:13px;display:grid;gap:13px}.preview-wrap{position:relative;border:1px solid var(--line);border-radius:19px;overflow:hidden;background:#0b0c13;min-height:290px;height:42dvh;max-height:470px}.preview-head{position:absolute;z-index:5;top:10px;left:11px;right:11px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}.pill{font-size:10px;background:#090a12a8;border:1px solid #ffffff25;padding:6px 9px;border-radius:99px;color:#dce0ef;backdrop-filter:blur(8px)}.canvas{position:absolute;inset:0;overflow:hidden;perspective:900px;touch-action:pan-y;isolation:isolate}.float-text{position:absolute;left:50%;top:50%;white-space:pre-wrap;max-width:90%;text-align:center;transform-style:preserve-3d;will-change:transform;user-select:none;touch-action:none;cursor:grab;text-shadow:0 5px 20px #0008;line-height:1.12;padding:5px 9px;border:1px solid transparent;border-radius:9px}.float-text.selected{border-color:#a99fff;background:#8b7cff19;outline:1px solid #8b7cff55}.canvas.viewing .float-text{cursor:default}.empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#b8bed0;padding:25px}.empty b{display:block;color:white;margin-bottom:5px}.editor-grid{display:grid;gap:12px}.panel{border:1px solid var(--line);background:var(--panel);border-radius:17px;padding:14px}.panel-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.panel-title b{font-size:13px}.muted{color:var(--muted);font-size:11px}.tabs{display:flex;gap:6px;overflow:auto;padding-bottom:3px}.tab{flex:1;min-width:75px;border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:10px;padding:9px 8px;font-size:11px;font-weight:700}.tab.active{background:#302d4b;color:#fff;border-color:#6358a8}.field{display:grid;gap:6px;margin:11px 0}.field label{font-size:11px;color:#c5c9d8;font-weight:650}.field input[type=text],.field textarea,.field select,.field input[type=number]{width:100%;border:1px solid var(--line);background:#11131e;color:var(--text);border-radius:10px;padding:11px;outline:none}.field textarea{min-height:74px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}.field input[type=color]{width:100%;height:40px;border:1px solid var(--line);border-radius:10px;background:#11131e;padding:4px}.field input[type=range]{width:100%;accent-color:var(--accent)}.row{display:flex;gap:9px}.row>*{flex:1;min-width:0}.value{font-size:11px;color:var(--accent2);text-align:right}.text-list{display:grid;gap:7px;margin-top:10px}.text-item{display:flex;align-items:center;gap:8px;padding:9px;border:1px solid var(--line);border-radius:11px;background:#131521}.text-item.active{border-color:var(--accent);background:#292541}.text-item .swatch{width:10px;height:10px;border-radius:50%;flex:none}.text-item .name{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}.icon-btn{border:1px solid var(--line);background:#24283a;border-radius:8px;padding:6px 8px;font-size:11px}.hint{font-size:10px;color:var(--muted);line-height:1.5}.hidden{display:none!important}.about{border-top:1px solid var(--line);margin-top:4px;padding:13px 2px 5px;text-align:center;color:var(--muted);font-size:10px;line-height:1.7}.about b{color:#e7e8f2}.modal{position:fixed;z-index:60;inset:0;background:#05060bd9;display:grid;place-items:center;padding:18px}.modal.hidden{display:none}.modal-card{width:min(100%,390px);background:var(--panel);border:1px solid var(--line);border-radius:19px;padding:16px;box-shadow:0 20px 80px #0009}#qrBox{display:grid;place-items:center;background:white;border-radius:14px;padding:15px;min-height:220px;margin:12px 0}#qrCode canvas,#qrCode img{max-width:100%;height:auto!important}.toast{position:fixed;z-index:50;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#f3f1ff;color:#151321;padding:10px 15px;border-radius:99px;font-size:12px;font-weight:750;box-shadow:0 8px 30px #0007;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}.viewer .top-actions .edit-only{display:none}.viewer .main{padding:10px}.viewer .preview-wrap{height:calc(100dvh - 90px);max-height:none;min-height:400px}.viewer .editor-grid,.viewer .about{display:none}.viewer .top{position:fixed;top:0;left:0;right:0;background:#10111a88;border:0}.viewer .main{padding-top:65px}.viewer .preview-head{top:70px}
+@media(min-width:760px){.main{grid-template-columns:minmax(0,1.35fr) minmax(320px,.85fr);align-items:start;padding:18px}.preview-wrap{height:68vh;max-height:720px}.editor-grid{max-height:calc(100vh - 95px);overflow:auto;padding-right:2px}.viewer .main{display:block;padding:0}.viewer .preview-wrap{height:100dvh;border:0;border-radius:0}.viewer .main{padding:0}.viewer .preview-head{top:15px}}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+<header class="top">
+ <div class="brand"><div class="logo">W</div><div><b>FLOATING TEXT STUDIO</b><small>W.O.M.P. studio · mobile editor</small></div></div>
+ <div class="top-actions"><button class="btn ghost edit-only" id="previewBtn">Preview</button><button class="btn primary edit-only" id="exportBtn">Export QR</button><button class="btn ghost hidden" id="backBtn">← Editor</button></div>
+</header>
+<main class="main">
+ <section class="preview-wrap">
+  <div class="canvas" id="canvas"><div class="empty" id="empty"><div><b>เริ่มสร้างข้อความลอยของมึง</b><span class="hint">เพิ่มข้อความจากแผงด้านล่าง แล้วลองลากบนหน้าจอ</span></div></div></div>
+ </section>
+ <section class="editor-grid" id="editor">
+  <div class="panel">
+   <div class="panel-title"><b>เครื่องมือแก้ไข</b><span class="muted">EDITOR</span></div>
+   <div class="tabs">
+    <button class="tab active" data-tab="text">ข้อความ</button><button class="tab" data-tab="motion">การเคลื่อนไหว</button><button class="tab" data-tab="background">พื้นหลัง</button><button class="tab" data-tab="settings">ตั้งค่า</button>
+   </div>
+   <div id="tab-text">
+    <div class="panel-title" style="margin-top:14px"><b>ข้อความของมึง</b><button class="btn primary" id="addText">＋ เพิ่มข้อความ</button></div>
+    <div class="field"><label>เนื้อหาข้อความที่เลือก</label><textarea id="contentInput" placeholder="พิมพ์ข้อความที่นี่..."></textarea></div>
+    <div class="row">
+     <div class="field"><label>สีข้อความ</label><input type="color" id="textColor" value="#ffffff"></div>
+     <div class="field"><label>ขนาดตัวอักษร</label><input type="range" id="fontSize" min="12" max="76" value="30"><div class="value" id="fontSizeVal">30 px</div></div>
+    </div>
+    <div class="row">
+     <div class="field"><label>ฟอนต์</label><select id="fontFamily"><option value="system-ui">System</option><option value="serif">Serif</option><option value="sans-serif">Sans-serif</option><option value="monospace">Monospace</option><option value="cursive">Cursive</option></select></div>
+     <div class="field"><label>ความหนา</label><select id="fontWeight"><option value="400">ปกติ</option><option value="600">กึ่งหนา</option><option value="800">หนา</option></select></div>
+    </div>
+    <div class="text-list" id="textList"></div>
+    <div class="row" style="margin-top:10px"><button class="btn" id="duplicateText">ทำซ้ำ</button><button class="btn" id="deleteText">ลบข้อความ</button></div>
+   </div>
+   <div id="tab-motion" class="hidden">
+    <div class="field"><label>จำนวนข้อความที่แสดง</label><input type="range" id="quantity" min="1" max="30" value="8"><div class="value" id="quantityVal">8 ชิ้น</div></div>
+    <div class="field"><label>ความเร็วการลอย</label><input type="range" id="speed" min="0" max="200" value="65"><div class="value" id="speedVal">65%</div></div>
+    <div class="field"><label>ขนาดการลอย</label><input type="range" id="spread" min="20" max="100" value="75"><div class="value" id="spreadVal">75%</div></div>
+    <p class="hint">จำนวนคือจำนวนสำเนาที่กระจายอยู่บนฉาก ข้อความต้นฉบับยังแก้ไขได้จากแท็บข้อความ</p>
+    <div class="panel-title" style="margin-top:18px"><b>หมุนข้อความ 3D ที่เลือก</b><span class="muted">X / Y / Z</span></div>
+    <div class="field"><label>หมุนแกน X</label><input type="range" id="rotX" min="-180" max="180" value="0"><div class="value" id="rotXVal">0°</div></div>
+    <div class="field"><label>หมุนแกน Y</label><input type="range" id="rotY" min="-180" max="180" value="0"><div class="value" id="rotYVal">0°</div></div>
+    <div class="field"><label>หมุนแกน Z</label><input type="range" id="rotZ" min="-180" max="180" value="0"><div class="value" id="rotZVal">0°</div></div>
+    <button class="btn" id="resetRotation">รีเซ็ตการหมุน</button>
+   </div>
+   <div id="tab-background" class="hidden">
+    <div class="field"><label>รูปแบบพื้นหลัง</label><select id="bgMode"><option value="solid">สีพื้น</option><option value="gradient">Gradient</option></select></div>
+    <div id="solidControls" class="field"><label>เลือกสีพื้นหลัง</label><input type="color" id="bgColor" value="#17182a"></div>
+    <div id="gradientControls" class="hidden">
+     <div class="row"><div class="field"><label>สีที่ 1</label><input type="color" id="grad1" value="#17182a"></div><div class="field"><label>สีที่ 2</label><input type="color" id="grad2" value="#5c397d"></div></div>
+    </div>
+    <div class="field"><label>ความมืดของพื้นหลัง</label><input type="range" id="overlay" min="0" max="80" value="0"><div class="value" id="overlayVal">0%</div></div>
+   </div>
+   <div id="tab-settings" class="hidden">
+    <div class="panel-title"><b>ข้อมูลผู้สร้าง</b><span class="muted">ABOUT</span></div>
+    <div class="field"><label>เครดิตบนเว็บไซต์</label><input type="text" value="เว็บไซต์นี้สร้างโดย TikTok @linux_138" readonly></div>
+    <div class="field"><label>สตูดิโอ</label><input type="text" value="W.O.M.P. studio" readonly></div>
+    <p class="hint">เครดิตนี้จะแสดงในหน้าแก้ไขและหน้าแสดงผลงานที่ส่งออก</p>
+    <div class="field"><label>ชื่อผลงาน</label><input type="text" id="projectName" value="A little message"></div>
+    <button class="btn" id="saveLocal">บันทึกการตั้งค่าในเครื่องนี้</button>
+    <p class="hint">ข้อมูลจะถูกเก็บไว้ในเบราว์เซอร์ของอุปกรณ์นี้</p>
+   </div>
+  </div>
+  <div class="about">เว็บไซต์นี้สร้างโดย <b>TikTok @linux_138</b><br><b>W.O.M.P. studio</b> · Made with creativity</div>
+ </section>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+<div class="modal hidden" id="qrModal"><div class="modal-card"><div class="panel-title"><b>แชร์ผลงานด้วย QR Code</b><button class="icon-btn" id="closeQR">ปิด ✕</button></div><p class="hint">สแกน QR เพื่อเปิดหน้า Preview พร้อมการตั้งค่าของผลงานนี้</p><div id="qrBox"><div id="qrCode"></div></div><div class="field"><label>ลิงก์สำหรับแชร์</label><input id="shareUrl" type="text" readonly></div><div class="row"><button class="btn" id="copyLink">คัดลอกลิงก์</button><button class="btn primary" id="downloadQR">ดาวน์โหลด QR</button></div><p class="hint" id="qrNote">ต้องอัปโหลดเว็บไซต์ขึ้น GitHub Pages ก่อน ลิงก์ QR จึงจะเปิดให้คนอื่นได้</p></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" onerror="this.onerror=null;this.src='https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js'"></script>
+
+<script>
+const $=id=>document.getElementById(id);
+const state={items:[{id:1,text:"มีอะไรจะบอก...",color:"#ffffff",size:30,font:"system-ui",weight:"600",x:50,y:50,rx:0,ry:0,rz:0}],selected:1,quantity:8,speed:65,spread:75,bgMode:"solid",bg:"#17182a",g1:"#17182a",g2:"#5c397d",overlay:0,project:"A little message"};
+let nextId=2, nodes=[], raf=0, last=0, phase=0, isViewer=false;
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1900)}
+function current(){return state.items.find(x=>x.id===state.selected)||state.items[0]}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function background(){let c=$("canvas");c.style.background=state.bgMode==="solid"?state.bg:state.bgMode==="gradient"?`linear-gradient(135deg,${state.g1},${state.g2})`:"#17182a";c.style.setProperty("--shade",state.overlay/100)}
+function selectItem(id){state.selected=id;syncInputs();renderList();renderScene()}
+function renderList(){$("textList").innerHTML=state.items.map(x=>`<div class="text-item ${x.id===state.selected?"active":""}" data-id="${x.id}"><span class="swatch" style="background:${x.color}"></span><span class="name">${esc(x.text||"ข้อความว่าง")}</span><button class="icon-btn" data-action="select">เลือก</button></div>`).join("");$("textList").querySelectorAll(".text-item").forEach(el=>el.addEventListener("click",()=>selectItem(+el.dataset.id)))}
+function syncInputs(){let x=current();if(!x)return;$("contentInput").value=x.text;$("textColor").value=x.color;$("fontSize").value=x.size;$("fontSizeVal").textContent=x.size+" px";$("fontFamily").value=x.font;$("fontWeight").value=x.weight;["X","Y","Z"].forEach(a=>{$("rot"+a).value=x["r"+a.toLowerCase()];$("rot"+a+"Val").textContent=x["r"+a.toLowerCase()]+"°"})}
+function renderScene(){let c=$("canvas");c.querySelectorAll(".float-text").forEach(n=>n.remove());nodes=[];$("empty").classList.toggle("hidden",state.items.length>0);if(!state.items.length)return;let count=Math.max(1,Math.min(30,state.quantity));for(let i=0;i<count;i++){let x=state.items[i%state.items.length],el=document.createElement("div");el.className="float-text";el.textContent=x.text;el.style.color=x.color;el.style.fontSize=x.size+"px";el.style.fontFamily=x.font;el.style.fontWeight=x.weight;let bx=(x.x+(i*37)%81-40+100)%100,by=(x.y+(i*53)%77-38+100)%100;el.dataset.index=i;el.dataset.id=x.id;el.dataset.baseX=bx;el.dataset.baseY=by;c.appendChild(el);nodes.push(el);}background();renderList()}
+function animate(t){if(!last)last=t;let dt=Math.min(40,t-last);last=t;phase+=dt*(state.speed/65)*.0008;nodes.forEach((el,i)=>{let x=+el.dataset.baseX,y=+el.dataset.baseY,drift=state.spread/100;let bob=Math.sin(phase*1.5+i*1.7)*10*drift,side=Math.cos(phase+i*1.2)*7*drift;let item=state.items.find(a=>a.id===+el.dataset.id)||state.items[0];el.style.left=`${x+side/5}%`;el.style.top=`${y+bob/5}%`;el.style.transform=`translate(-50%,-50%) rotateX(${item.rx+Math.sin(phase+i)*5}deg) rotateY(${item.ry+Math.cos(phase+i)*7}deg) rotateZ(${item.rz}deg) translateZ(${Math.sin(phase+i)*24*drift}px)`});raf=requestAnimationFrame(animate)}
+function update(){let x=current();if(!x)return;x.text=$("contentInput").value;x.color=$("textColor").value;x.size=+$("fontSize").value;x.font=$("fontFamily").value;x.weight=$("fontWeight").value;$("fontSizeVal").textContent=x.size+" px";renderScene()}
+["contentInput","textColor","fontSize","fontFamily","fontWeight"].forEach(id=>$(id).addEventListener("input",update));
+$("addText").onclick=()=>{let x={id:nextId++,text:"ข้อความใหม่",color:"#ffffff",size:28,font:"system-ui",weight:"600",x:30+Math.random()*40,y:30+Math.random()*40,rx:0,ry:0,rz:0};state.items.push(x);selectItem(x.id);$("contentInput").focus()};
+$("duplicateText").onclick=()=>{let x=current();if(!x)return;let y={...x,id:nextId++,x:(x.x+12)%90,y:(x.y+12)%90};state.items.push(y);selectItem(y.id)};
+$("deleteText").onclick=()=>{state.items=state.items.filter(x=>x.id!==state.selected);state.selected=state.items[0]?.id||null;renderList();renderScene();if(current())syncInputs()};
+$("quantity").oninput=e=>{state.quantity=+e.target.value;$("quantityVal").textContent=state.quantity+" ชิ้น";renderScene()};
+$("speed").oninput=e=>{state.speed=+e.target.value;$("speedVal").textContent=state.speed+"%"};$("spread").oninput=e=>{state.spread=+e.target.value;$("spreadVal").textContent=state.spread+"%"};
+["X","Y","Z"].forEach(a=>$("rot"+a).oninput=e=>{let x=current();if(!x)return;x["r"+a.toLowerCase()]=+e.target.value;$("rot"+a+"Val").textContent=e.target.value+"°";renderScene()});
+$("resetRotation").onclick=()=>{let x=current();if(!x)return;x.rx=x.ry=x.rz=0;syncInputs();renderScene()};
+$("bgMode").onchange=e=>{state.bgMode=e.target.value;["solid","gradient"].forEach(v=>$(v+"Controls").classList.toggle("hidden",v!==state.bgMode));background()};
+$("bgColor").oninput=e=>{state.bg=e.target.value;background()};$("grad1").oninput=e=>{state.g1=e.target.value;background()};$("grad2").oninput=e=>{state.g2=e.target.value;background()};
+$("overlay").oninput=e=>{state.overlay=+e.target.value;$("overlayVal").textContent=state.overlay+"%";$("canvas").style.filter=`brightness(${1-state.overlay/150})`};
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));["text","motion","background","settings"].forEach(v=>$("tab-"+v).classList.toggle("hidden",v!==b.dataset.tab))});
+$("projectName").oninput=e=>state.project=e.target.value;
+function config(){return JSON.stringify(state).replace(/</g,"\\u003c")}
+$("saveLocal").onclick=()=>{try{localStorage.setItem("womp-floating-studio",config());toast("บันทึกไว้ในเครื่องแล้ว")}catch(e){toast("บันทึกไม่สำเร็จ พื้นหลังอาจมีขนาดใหญ่เกินไป")}};
+function viewerHTML(){let data=config();return `<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#10111a"><title>${esc(state.project)}</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#111;color:white;font-family:system-ui}#c{position:fixed;inset:0;overflow:hidden;perspective:900px;touch-action:pan-y}.t{position:absolute;white-space:pre-wrap;text-align:center;max-width:90%;transform-style:preserve-3d;will-change:transform;text-shadow:0 5px 20px #0009;line-height:1.12;user-select:none}.credit{position:fixed;bottom:12px;left:0;right:0;text-align:center;color:#ffffff99;font-size:10px;pointer-events:none}</style></head><body><div id="c"></div><div class="credit">TikTok @linux_138 · W.O.M.P. studio</div><script>const s=${data},c=document.getElementById('c');c.style.background=s.bgMode==='solid'?s.bg:s.bgMode==='gradient'?'linear-gradient(135deg,'+s.g1+','+s.g2+')':s.image?'center/cover no-repeat url("'+s.image+'")':'#17182a';let ns=[];for(let i=0;i<Math.max(1,Math.min(30,s.quantity));i++){let x=s.items[i%s.items.length],n=document.createElement('div');n.className='t';n.textContent=x.text;n.style.color=x.color;n.style.fontSize=x.size+'px';n.style.fontFamily=x.font;n.style.fontWeight=x.weight;n.dataset.x=(x.x+(i*37)%81-40+100)%100;n.dataset.y=(x.y+(i*53)%77-38+100)%100;n.dataset.i=i;c.appendChild(n);ns.push({n,x})}let p=0,last=0;function go(t){if(!last)last=t;let d=Math.min(40,t-last);last=t;p+=d*(s.speed/65)*.0008;ns.forEach(({n,x},i)=>{let b=s.spread/100;n.style.left=(+n.dataset.x+Math.cos(p+i*1.2)*7*b/5)+'%';n.style.top=(+n.dataset.y+Math.sin(p*1.5+i*1.7)*10*b/5)+'%';n.style.transform='translate(-50%,-50%) rotateX('+(x.rx+Math.sin(p+i)*5)+'deg) rotateY('+(x.ry+Math.cos(p+i)*7)+'deg) rotateZ('+x.rz+'deg) translateZ('+Math.sin(p+i)*24*b+'px)' });requestAnimationFrame(go)}requestAnimationFrame(go);<\/script></body></html>`}
+function encodeShare(data){let bytes=new TextEncoder().encode(data),bin="";bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
+function makeShareUrl(){let base=location.origin+location.pathname;return base+"#share="+encodeShare(config())}
+$("exportBtn").onclick=()=>{
+ if(!/^https?:$/.test(location.protocol)){toast("เปิดเว็บผ่าน GitHub Pages ก่อน จึงสร้าง QR ลิงก์แชร์ได้");return}
+ const url=makeShareUrl();$("shareUrl").value=url;$("qrCode").innerHTML="";$("qrNote").textContent="สแกนเพื่อเปิดหน้า Preview พร้อมข้อความและการตั้งค่าทั้งหมด";$("qrModal").classList.remove("hidden");
+ if(url.length>2800){$("qrNote").textContent="ลิงก์ยาวเกินไปสำหรับ QR Code ลองลดจำนวนข้อความหรือย่อเนื้อหาก่อน";toast("ข้อมูลยาวเกินไป สร้าง QR ไม่ได้");return}
+ if(!window.QRCode){$("qrNote").textContent="กำลังโหลดตัวสร้าง QR กรุณาลองกด Export อีกครั้งเมื่อเชื่อมต่ออินเทอร์เน็ต";return}
+ try{new QRCode($("qrCode"),{text:url,width:240,height:240,colorDark:"#111111",colorLight:"#ffffff",correctLevel:QRCode.CorrectLevel.L})}
+ catch(err){console.error(err);$("qrNote").textContent="สร้าง QR ไม่สำเร็จ ลิงก์ยังคัดลอกได้จากช่องด้านบน";toast("สร้าง QR ไม่สำเร็จ")}
+};
+$("closeQR").onclick=()=>$("qrModal").classList.add("hidden");
+$("qrModal").addEventListener("click",e=>{if(e.target===$("qrModal"))$("qrModal").classList.add("hidden")});
+$("copyLink").onclick=async()=>{try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText($("shareUrl").value);else{const field=$("shareUrl");field.focus();field.select();if(!document.execCommand("copy"))throw new Error("copy failed")}toast("คัดลอกลิงก์แล้ว")}catch(e){toast("คัดลอกไม่สำเร็จ กดค้างที่ช่องลิงก์เพื่อคัดลอกแทน")}};
+$("downloadQR").onclick=()=>{let img=$("qrCode").querySelector("img"),canvas=$("qrCode").querySelector("canvas"),url=img?.src||(canvas?canvas.toDataURL("image/png"):null);if(!url){toast("ยังไม่มี QR Code");return}let a=document.createElement("a");a.href=url;a.download="womp-share-qr.png";a.click()};
+$("previewBtn").onclick=()=>{isViewer=true;$("app").classList.add("viewer");$("editor").classList.add("hidden");$("previewBtn").classList.add("hidden");$("exportBtn").classList.add("hidden");$("backBtn").classList.remove("hidden");$("canvas").classList.add("viewing")};
+$("backBtn").onclick=()=>{isViewer=false;$("app").classList.remove("viewer");$("editor").classList.remove("hidden");$("previewBtn").classList.remove("hidden");$("exportBtn").classList.remove("hidden");$("backBtn").classList.add("hidden");$("canvas").classList.remove("viewing");renderScene()};
+let shared=false;
+try{
+ const hash=location.hash.match(/(?:^#|&)share=([A-Za-z0-9_-]+)/);
+ if(hash){
+  let b=hash[1].replace(/-/g,"+").replace(/_/g,"/");b+="=".repeat((4-b.length%4)%4);
+  let raw=atob(b),bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
+  Object.assign(state,JSON.parse(new TextDecoder().decode(bytes)));shared=true;
+ }else{
+  let saved=localStorage.getItem("womp-floating-studio");
+  if(saved)Object.assign(state,JSON.parse(saved));
+ }
+ nextId=Math.max(2,...state.items.map(x=>x.id+1));
+ $("quantity").value=state.quantity;$("speed").value=state.speed;$("spread").value=state.spread;
+ $("quantityVal").textContent=state.quantity+" ชิ้น";$("speedVal").textContent=state.speed+"%";$("spreadVal").textContent=state.spread+"%";
+ state.bgMode=state.bgMode==="gradient"?"gradient":"solid";$("bgMode").value=state.bgMode;$("bgColor").value=state.bg;$("grad1").value=state.g1;$("grad2").value=state.g2;
+ $("overlay").value=state.overlay;$("overlayVal").textContent=state.overlay+"%";$("projectName").value=state.project;
+ ["solid","gradient"].forEach(v=>$(v+"Controls").classList.toggle("hidden",v!==state.bgMode));
+}catch(e){console.warn("Could not load saved/share data",e)}
+syncInputs();renderScene();
+if(shared){isViewer=true;$("app").classList.add("viewer");$("editor").classList.add("hidden");$("previewBtn").classList.add("hidden");$("exportBtn").classList.add("hidden");$("backBtn").classList.add("hidden");$("canvas").classList.add("viewing")}
+raf=requestAnimationFrame(animate);
+</script>
+</body></html>
